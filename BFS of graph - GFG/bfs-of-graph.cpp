@@ -9,19 +9,29 @@ class Solution {
     vector<int> bfsOfGraph(int v, vector<int> adj[]) {
         // Code here
         vector<int>bfs;
+        //1.make a visited array and initialize with 0 if starting node is 1 then size of vis array is
+        //int vis[v+1];
         int vis[v]={0};
+        // make starting index visited by 1
         vis[0]=1;
+        //2.take a queue in bfs
         queue<int>q;
+         // push the initial starting node
         q.push(0);
+         // iterate till the queue is empty 
         while(!q.empty())
         {
+            // get the topmost element in the queue 
             int node=q.front();
             q.pop();
             bfs.push_back(node);
+            // traverse for all its neighbours 
             for(auto it:adj[node])
             {
                 if(!vis[it])
                 {
+                // if the neighbour has previously not been visited, 
+                // store in Q and mark as visited 
                     vis[it]=1;
                     q.push(it);
                 }
