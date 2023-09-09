@@ -16,8 +16,8 @@ bool ok(int val,int val1)
 }
     int findMissing(int arr[], int n) {
         // code here
-        //T.C=O(LOGN)
-        /*int d=(arr[n-1]-arr[0])/n;
+        //T.C->>O(LOGN)
+        int d=(arr[n-1]-arr[0])/n;
         int l=0,h=n-1;
         while(l+1<h)
         {
@@ -33,9 +33,12 @@ bool ok(int val,int val1)
                 h=mid;
             }
         }
-        return arr[l]+d;*/
+        return arr[l]+d;
         
-        int d=(arr[n-1]-arr[0])/n;
+        
+        //T.C->>O(N)
+        
+        /*int d=(arr[n-1]-arr[0])/n;
         int ans;
         for(int i=0;i<n-1;i++)
         {
@@ -45,7 +48,7 @@ bool ok(int val,int val1)
                 break;
             }
         }
-        return ans;
+        return ans;*/
         
         
     }
