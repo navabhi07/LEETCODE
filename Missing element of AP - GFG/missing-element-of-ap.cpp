@@ -1,0 +1,57 @@
+//{ Driver Code Starts
+//Initial template for C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+//User function template for C++
+
+class Solution{   
+public:
+bool ok(int val,int val1)
+{
+    if(val==val1)return true;
+    else return false;
+}
+    int findMissing(int arr[], int n) {
+        // code here
+        int d=(arr[n-1]-arr[0])/n;
+        int l=0,h=n-1;
+        while(l+1<h)
+        {
+            int mid=l+(h-l)/2;
+            int val=arr[0]+mid*d;
+            if(ok(val,arr[mid]))
+            {
+                l=mid;
+                
+            }
+            else
+            {
+                h=mid;
+            }
+        }
+        return arr[l]+d;
+    }
+};
+
+//{ Driver Code Starts.
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        int arr[n];
+        for (int i = 0; i < n; i++) {
+            cin >> arr[i];
+        }
+        Solution ob;
+        auto ans = ob.findMissing(arr, n);
+        cout << ans << "\n";
+    }
+    return 0;
+}
+
+// } Driver Code Ends
