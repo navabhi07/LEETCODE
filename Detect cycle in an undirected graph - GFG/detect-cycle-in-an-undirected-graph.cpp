@@ -6,15 +6,27 @@ using namespace std;
 class Solution {
   public:
   
-  bool iscycledfs(vector<int>adj[],vector<int>&vis,int strt,int pare)
+  bool iscyclebfs(vector<int>adj[],vector<int>&vis,int strt)
   {
+      queue<pair<int,int>>q;
+      q.push({strt,-1});
       vis[strt]=1;
-      for(auto it:adj[strt])
+      while(!q.empty())
       {
+          pair<int,int>p=q.front();
+          q.pop();
+          int source=p.first;
+          int parent=p.second;
           
-          if(it==pare)continue;
-          if(vis[it]==1)return true;
-          if(iscycledfs(adj,vis,it,strt))return true;
+          for(auto it:adj[source])
+          {
+              if(!vis[it])
+              {
+                  vis[it]=1;
+                  q.push({it,source});
+              }
+              else if(it!=parent)return true;
+          }
       }
       return false;
   }
@@ -28,7 +40,7 @@ class Solution {
         vector<int>vis(n,0);
         for(int i=0;i<n;i++)
         {
-            if(!vis[i]&&iscycledfs(adj,vis,i,-1))return true;
+            if(!vis[i]&&iscyclebfs(adj,vis,i))return true;
             
         }
         return false;
