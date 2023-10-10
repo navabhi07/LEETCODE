@@ -6,7 +6,7 @@ using namespace std;
 class Solution {
   public:
   
-  bool iscycle(vector<int>adj[],vector<int>&vis,int strt,int pare)
+  bool iscycledfs(vector<int>adj[],vector<int>&vis,int strt,int pare)
   {
       vis[strt]=1;
       for(auto it:adj[strt])
@@ -14,7 +14,7 @@ class Solution {
           
           if(it==pare)continue;
           if(vis[it]==1)return true;
-          if(iscycle(adj,vis,it,strt)==1)return true;
+          if(iscycledfs(adj,vis,it,strt))return true;
       }
       return false;
   }
@@ -28,7 +28,7 @@ class Solution {
         vector<int>vis(n,0);
         for(int i=0;i<n;i++)
         {
-            if(!vis[i]&&iscycle(adj,vis,i,-1))return true;
+            if(!vis[i]&&iscycledfs(adj,vis,i,-1))return true;
             
         }
         return false;
