@@ -5,20 +5,25 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
 public:
-bool bipdfs(vector<int>adj[],int curr,vector<int>&color,int currcolor)
+bool bipbfs(vector<int>adj[],int curr,vector<int>&color,int currcolor)
 {
+    queue<int>q;
+    q.push(curr);
     color[curr]=currcolor;
-    for(auto v:adj[curr])
+    while(!q.empty())
     {
-        if(color[v]==color[curr])return false;
-        
-        if(color[v]==-1)
-        { // this node is never visted till  now
-             int colorofv=1-currcolor;
-             if(bipdfs(adj,v,color,colorofv)==false)return false;
+        int u=q.front();
+        q.pop();
+        for(auto v:adj[u])
+        {
+            if(color[v]==color[u])return false;
+            else if(color[v]==-1)//never visited and not colored yet
+            {
+                color[v]=1-color[u];
+                q.push(v);
+            }
         }
     }
-    
     return true;
 }
 	bool isBipartite(int v, vector<int>adj[]){
@@ -31,7 +36,7 @@ bool bipdfs(vector<int>adj[],int curr,vector<int>&color,int currcolor)
 	    {
 	        if(color[i]==-1)
 	        {
-	            if(bipdfs(adj,i,color,1)==false )return false;
+	            if(bipbfs(adj,i,color,1)==false )return false;
 	        }
 	    }
 	    return true;
